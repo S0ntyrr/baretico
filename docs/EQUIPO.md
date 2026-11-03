@@ -3,8 +3,8 @@
 ## Roles
 | Rol | Responsable | Entregables |
 |---|---|---|
-| Dirección de arte / UI | _(nombre)_ | Guía de marca, wireframes y UI en Figma, ilustraciones de prendas |
-| Motion designer | _(nombre)_ | Tokens de movimiento, pieza Lottie, especificación de micro-interacciones |
+| Dirección de arte / UI | _(nombre)_ | Guía de marca, hoja de personaje, UI en Figma, ilustración por capas de Baretico |
+| Motion designer | _(nombre)_ | Animación de cambio de ropa, tokens, pieza Lottie, micro-interacciones |
 | Front-end | _(nombre)_ | Componentes React, rutas, carrito, integración de animaciones |
 | QA · rendimiento · accesibilidad | _(nombre)_ | Lighthouse por página, pruebas en dispositivos, reducir movimiento, contraste |
 | Documentación / PM | _(nombre)_ | README, decisiones, tablero de tareas, sustentación |
@@ -16,7 +16,8 @@
 | F2 · Maqueta | Estructura React, 6 páginas estáticas responsive, datos de catálogo | `v0.2-maqueta` |
 | F3 · Motion | Hero, transiciones, scroll, micro-interacciones, pieza Lottie | `v0.3-motion` |
 | F4 · Optimización | Lighthouse ≥ 80 móvil, reducir movimiento, contraste, correcciones | `v0.4-optimizacion` |
-| F5 · Publicación | Deploy en GitHub Pages, documentación final, sustentación | `v1.0` |
+| F5 · Publicación | Deploy en GitHub Pages, documentación final | `v1.0` |
+| F6 · Rediseño Baretico | Personaje como identidad, probador animado, paleta gris, nuevo Lottie, nueva medición | `v2.0` |
 
 ## Flujo de Git
 - `main` siempre publicable (se despliega automáticamente).

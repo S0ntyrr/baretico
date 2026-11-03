@@ -1,5 +1,5 @@
 /**
- * Tokens de movimiento de OBRA NEGRA.
+ * Tokens de movimiento de BARETICO.
  * Cada valor responde a un principio de animación (ver docs/MOTION.md):
  *  - TIEMPO: duraciones cortas para feedback, largas solo para narrativa.
  *  - ACELERACIÓN: "colado" (ease-out fuerte) para entradas, "demolición" (ease-in) para salidas.

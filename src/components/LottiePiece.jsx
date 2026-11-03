@@ -3,13 +3,13 @@ import { useReducedMotion } from 'framer-motion'
 import { Mark } from './Logo'
 
 /**
- * PIEZA ORIGINAL: animación Lottie del sello "construyéndose"
- * (src/assets/obra-negra-mark.json, generada por design/build-lottie.py).
+ * PIEZA ORIGINAL: animación Lottie de Baretico "alistándose"
+ * (src/assets/baretico-mark.json, generada por design/build-lottie.py).
  * - El reproductor (lottie_light, solo SVG) y el JSON se cargan bajo demanda
  *   cuando la pieza entra en pantalla -> no penaliza la carga inicial.
  * - Con reducir movimiento se muestra el sello estático.
  */
-export default function LottiePiece({ loop = true, size = 280, label = 'Animación del sello de OBRA NEGRA construyéndose' }) {
+export default function LottiePiece({ loop = true, size = 280, label = 'Animación de Baretico alistándose: gafas y gorra' }) {
   const ref = useRef(null)
   const reduced = useReducedMotion()
   const [ready, setReady] = useState(false)
@@ -22,7 +22,7 @@ export default function LottiePiece({ loop = true, size = 280, label = 'Animaci�
       if (anim) { anim.play(); return }
       const [{ default: lottie }, { default: data }] = await Promise.all([
         import('lottie-web/build/player/lottie_light'),
-        import('../assets/obra-negra-mark.json'),
+        import('../assets/baretico-mark.json'),
       ])
       if (cancelled) return
       anim = lottie.loadAnimation({ container: ref.current, renderer: 'svg', loop, autoplay: true, animationData: data })

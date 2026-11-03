@@ -1,72 +1,58 @@
-# OBRA NEGRA — tienda de ropa con motion design
+# BARETICO — tienda de ropa con motion design
 
-> Streetwear minimalista de autor hecho en Bogotá. *Prendas en construcción.*
+> Streetwear parcero de Bogotá. **Pruébatelo en Baretico.**
 
-Sitio de e-commerce **simulado** construido con **React + Vite + Framer Motion**, con una pieza
-original animada en **Lottie**. Proyecto académico de motion design para la web.
+E-commerce **simulado** con **React + Vite + Framer Motion**. La identidad es el personaje: **Baretico**, un perro de rizos chocolate con gafas verde clorofila.
+Eliges una prenda y Baretico **se cambia de ropa con una animación**: se agacha, salta, aparece una nube, cambia la prenda en el aire y aterriza.
+La tienda es gris y minimalista para que el color lo ponga él.
 
-- **Sitio publicado:** `https://<tu-usuario>.github.io/obra-negra/` *(se activa al hacer push, ver "Publicación")*
-- **Guía de marca (1 página):** ruta `/#/marca` del sitio y [`docs/BRAND.md`](docs/BRAND.md)
+- **Sitio publicado:** `https://<tu-usuario>.github.io/baretico/` *(se activa al hacer push, ver "Publicación")*
+- **Guía de marca (1 página):** ruta `/#/marca` y [`docs/BRAND.md`](docs/BRAND.md)
 
 ## Páginas
 | Ruta | Página | Motion destacado |
 |---|---|---|
-| `/` | Inicio | Hero: plano que se traza → letras que suben con máscara → prenda con parallax; marquee; manifiesto que "fragua" con el scroll |
-| `/catalogo` | Catálogo | Filtros con indicador compartido (`layoutId`), tarjetas que se reacomodan (`layout` + `AnimatePresence`), hover con elevación y CTA |
-| `/producto/:id` | Detalle | Revelado con `clip-path`, selector de talla animado, error que "tiembla", botón con cambio de estado y **vuelo al carrito** |
-| `/carrito` | Carrito (simulado) | Líneas que entran/salen, contador que rueda, total que cuenta, badge del carrito con anticipación |
-| `/nosotros` | Nosotros | **Pieza Lottie original**, línea de tiempo que crece con el scroll |
-| `/contacto` | Contacto | Validación con feedback animado, envío simulado con estado de carga y confirmación |
-| `/marca` | Guía de marca | Logo, paleta con contrastes, tipografía, tono y tokens de movimiento |
-
-Transición entre todas las páginas: panel negro "colado" (`AnimatePresence mode="wait"`).
+| `/` | Inicio | Título con máscara, Baretico cae al escenario con resorte, **probador** con 6 prendas × 3 opciones, manifiesto ligado al scroll |
+| `/catalogo` | Catálogo | Probador lateral (flotante en móvil), botón "Probar en Baretico" en cada tarjeta, filtros con `layoutId` y reacomodo con `layout` |
+| `/producto/:id` | Detalle | Al entrar, **Baretico se pone la prenda**; selector de talla, error que tiembla, botón con cambio de estado y vuelo al carrito |
+| `/carrito` | Carrito (simulado) | Baretico se viste **con lo que hay en el carrito**; líneas que entran/salen, contador que rueda, total que cuenta |
+| `/nosotros` | Nosotros | **Pieza Lottie original** (Baretico se alista), tres looks, línea de tiempo con scroll |
+| `/contacto` | Contacto | Validación animada y envío simulado |
+| `/marca` | Guía de marca | Personaje, logo, paletas, tipografía, tono y tokens de movimiento |
 
 ## Cómo correrlo
 ```bash
 npm install
 npm run dev       # http://localhost:5173
-npm run build     # genera dist/
-npm run preview   # sirve dist/ para medir con Lighthouse
+npm run build && npm run preview   # para medir con Lighthouse
 ```
 Regenerar la pieza Lottie: `python3 design/build-lottie.py`.
 
 ## Publicación (GitHub Pages)
-1. Crea el repositorio vacío `obra-negra` en GitHub.
-2. `git remote add origin https://github.com/<tu-usuario>/obra-negra.git && git push -u origin main`
-3. En GitHub → *Settings → Pages → Source:* **GitHub Actions**. El workflow
-   [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) compila y publica en cada push a `main`.
+1. Crea el repositorio `baretico` en GitHub.
+2. `git remote add origin https://github.com/<tu-usuario>/baretico.git && git push -u origin main --tags`
+3. GitHub → *Settings → Pages → Source:* **GitHub Actions**. El workflow `.github/workflows/deploy.yml` publica en cada push.
 
-Se usa `HashRouter` + `base: './'`, así que las rutas funcionan en Pages sin configuración extra.
-
-## Resultados medidos (Lighthouse móvil, build de producción)
-| Página | Rendimiento | Accesibilidad | Buenas prácticas |
-|---|---|---|---|
-| Inicio | 91 | 100 | 100 |
-| Catálogo | 94 | 100 | 100 |
-| Producto | 92 | 100 | 100 |
-| Carrito | 94 | 100 | 100 |
-| Nosotros | 89 | 100 | 100 |
-| Contacto | 94 | 100 | 100 |
-| Marca | 92 | 100 | 100 |
-
-Detalle de mediciones y optimizaciones en [`docs/DECISIONES.md`](docs/DECISIONES.md).
-
-## Documentación
-- [`docs/BRAND.md`](docs/BRAND.md) — guía de marca de una página
-- [`docs/MOTION.md`](docs/MOTION.md) — principios de animación aplicados, pieza por pieza
-- [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones de diseño y desarrollo, rendimiento y accesibilidad
-- [`docs/EQUIPO.md`](docs/EQUIPO.md) — roles, fases de entrega y flujo de Git
-- [`docs/CREDITOS.md`](docs/CREDITOS.md) — origen y licencia de todo el material
+## Resultados (Lighthouse móvil, build de producción)
+| Página | Rendimiento | Accesibilidad | Buenas prácticas | SEO |
+|---|---|---|---|---|
+| Inicio | 90 | 100 | 100 | 100 |
+| Catálogo | 92 | 100 | 100 | 100 |
+| Producto | 91 | 100 | 100 | 100 |
+| Carrito | 94 | 100 | 100 | 100 |
+| Nosotros | 89 | 100 | 100 | 100 |
+| Contacto | 94 | 100 | 100 | 100 |
+| Marca | 89 | 100 | 100 | 100 |
 
 ## Estructura
 ```
-src/
-  App.jsx               rutas + transiciones + MotionConfig(reducedMotion="user")
-  motion/tokens.js      duraciones, curvas y stagger (sistema de movimiento)
-  components/           Header, Page (transición), Reveal (scroll), ProductCard,
-                        Garment (ilustraciones SVG), LottiePiece, FlyLayer, Logo
-  pages/                Home, Catalog, Product, Cart, About, Contact, Brand, NotFound
-  context/CartContext   carrito simulado (useReducer + localStorage)
-  assets/obra-negra-mark.json   pieza Lottie original
-design/build-lottie.py  fuente de la pieza Lottie
+src/mascot/parts.jsx     Baretico dibujado por capas (cuerpo + 6 prendas × 3 variantes)
+src/mascot/Mascot.jsx    Animación de cambio de ropa (anticipación → salto → nube → aterrizaje)
+src/mascot/Probador.jsx  Selector de prendas
+src/mascot/Thumb.jsx     Miniatura de una prenda (recorta el mismo dibujo)
+src/context/LookContext  Lo que Baretico tiene puesto (compartido entre páginas)
+src/context/CartContext  Carrito simulado
+src/motion/tokens.js     Duraciones, curvas y stagger
+design/build-lottie.py   Fuente de la pieza Lottie
+docs/                    Marca, motion, decisiones, equipo, créditos
 ```

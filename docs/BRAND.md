@@ -1,14 +1,14 @@
-# OBRA NEGRA · Guía de marca (v1.0)
+# BARETICO · Guía de marca (v2.0)
 
-**Concepto.** La "obra negra" es la etapa en que una edificación tiene estructura pero no acabados. Bogotá siempre está en construcción; nuestra ropa también: cruda, honesta, en proceso. **Streetwear + minimalismo + autor.**
+**Concepto.** La identidad es el personaje. Baretico es un perro de rizos chocolate, parcero y bogotano, que se viste mejor que nosotros. La tienda es **gris y silenciosa** para que el color, el humor y el movimiento vengan solo de él.
 
 | | |
 |---|---|
-| **Logo** | Sello cuadrado = *formaleta* (marco negro) + *colado* (bloque naranja) + *varilla* (barra). Wordmark `OBRA/NEGRA` en Archivo condensado 850, barra en Óxido. Área de respeto = grosor del marco. Tamaño mínimo 24 px. No rotar, no cambiar el naranja, no usar sombras. |
-| **Paleta** | Negro obra `#111111` · Cal `#ECEAE4` (fondo) · Cemento `#D9D6CE` · Gris varilla `#5C5A54` · **Naranja señal `#FF5A1F`** (acento) · Óxido `#B83A0A` |
-| **Contraste** | Negro/Cal 15.7:1 · Gris varilla/Cal 5.7:1 · Negro/Naranja 6.1:1 · Óxido/Cal 4.8:1. El naranja **nunca** lleva texto blanco ni va como texto sobre Cal. |
-| **Tipografía** | **Archivo** (variable, ejes peso 100–900 y ancho 62–125 %): títulos condensados en mayúscula 850–900, texto al 100 %. **IBM Plex Mono** 400: etiquetas, precios, datos técnicos, en mayúscula con tracking 0.08em. |
-| **Retícula** | Retícula de plano de 48 px visible en fondos de producto y hero. Bordes de 2 px, esquinas rectas (radio 0). |
-| **Tono** | Directo, técnico, bogotano. Frases cortas con vocabulario de obra (cimiento, formaleta, colado, fraguado). Nunca superlativos, urgencias falsas ni emojis. Ej.: "Hecho para subir y bajar." |
-| **Movimiento** | Curvas *colado* (entra y asienta), *demolición* (sale acelerando), *carga* (anticipación, solo confirmaciones), *firme* (paneles). Ver `docs/MOTION.md`. |
-| **Imágenes** | Ilustración vectorial plana de las prendas, contorno negro 3 px, detalles de costura en línea. |
+| **Personaje** | Cabeza grande (1/3 del cuerpo), rizos chocolate `#4A2C20`, hocico `#6A4331`, gafas redondas verde clorofila siempre puestas. Look de firma: gorra 4:20 camo, chaqueta tricolor, camiseta 420, cargo oliva, tenis selva. Se dibuja en vector plano con contorno de 3 px. Nunca lleva logos de otras marcas. |
+| **Logo** | Sello = cabeza con gafas y gorra + wordmark `BARETICO` en Archivo condensado 900. Mínimo 24 px. |
+| **Paleta de la tienda** | Tinta `#151515` · Niebla `#E6E6E3` (fondo) · Concreto `#D6D6D2` · Asfalto `#5A5A57` · Blanco `#F7F7F5` · **Clorofila `#6BFF2E`** (único acento, siempre con texto Tinta) |
+| **Colores del personaje** | Solo dentro de Baretico y de las prendas: camuflado `#5E7F2F`, amarillo `#FFD21F`, azul `#1F4FBF`, rojo `#D7262E` |
+| **Contraste** | Tinta/Niebla 14.6:1 · Asfalto/Niebla 5.5:1 · Tinta/Clorofila 13.9:1 · Error `#B3261E`/Niebla 5.2:1 |
+| **Tipografía** | **Archivo** variable (peso y ancho): títulos condensados 900 en mayúscula; texto al 100 %. **IBM Plex Mono**: etiquetas, precios y datos. |
+| **Tono** | Parcero, corto, con humor; la tienda habla de Baretico en tercera persona. "Pruébatelo en Baretico." 4:20 es estética de la marca, no una invitación al consumo. |
+| **Movimiento** | El personaje es el único elemento que se mueve con personalidad (salta, aplasta, sonríe). La interfaz se mueve sobria: fundidos, máscaras y telón. |

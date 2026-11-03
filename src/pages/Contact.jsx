@@ -48,11 +48,11 @@ export default function Contact() {
       <section className="section section--top">
         <div className="wrap contact">
           <div>
-            <Reveal as="h1" className="h1">Hablemos<br />de obra</Reveal>
-            <Reveal i={1}><p className="lead muted">Pedidos, colaboraciones, prensa o reparaciones. Respondemos en 48 h hábiles.</p></Reveal>
+            <Reveal as="h1" className="h1">Habla con<br />el parche</Reveal>
+            <Reveal i={1}><p className="lead muted">Pedidos, colaboraciones, prensa o cambios. Respondemos en 48 h hábiles.</p></Reveal>
             <Reveal i={2} className="contact__data mono">
-              <p>Taller — Barrio Restrepo, Bogotá (dirección ficticia)</p>
-              <p>hola@obranegra.example</p>
+              <p>Taller — Chapinero, Bogotá (dirección ficticia)</p>
+              <p>hola@baretico.example</p>
               <p>Lun–Sáb · 10:00–18:00</p>
             </Reveal>
           </div>
@@ -72,11 +72,11 @@ export default function Contact() {
                     <label htmlFor="motivo">Motivo</label>
                     <select id="motivo" value={v.motivo} onChange={set('motivo')}>
                       <option value="pedido">Pedido</option><option value="colab">Colaboración</option>
-                      <option value="prensa">Prensa</option><option value="reparacion">Reparación</option>
+                      <option value="prensa">Prensa</option><option value="cambio">Cambio de talla</option>
                     </select>
                   </div>
                   {Field({ id: 'mensaje', label: 'Mensaje', as: 'textarea' })}
-                  <m.button className="btn btn--senal" type="submit" disabled={status === 'sending'} whileTap={{ scale: 0.95 }}>
+                  <m.button className="btn btn--neon" type="submit" disabled={status === 'sending'} whileTap={{ scale: 0.95 }}>
                     {status === 'sending' ? <><span className="spinner" aria-hidden="true" /> Enviando…</> : 'Enviar mensaje'}
                   </m.button>
                 </m.form>

@@ -3,14 +3,14 @@ import { useEffect } from 'react'
 import { dur, ease } from '../motion/tokens'
 
 /**
- * Transición entre páginas: "colado".
+ * Transición entre páginas: "telón".
  * Un panel negro sube cubriendo la página que sale (ease-in: demolición) y
  * se retira hacia arriba revelando la nueva (ease-out: colado).
  * Con reducir movimiento: solo un fundido corto.
  */
 export default function Page({ title, children, className = '' }) {
   const reduced = useReducedMotion()
-  useEffect(() => { document.title = title ? `${title} — OBRA NEGRA` : 'OBRA NEGRA — Prendas en construcción' }, [title])
+  useEffect(() => { document.title = title ? `${title} — BARETICO` : 'BARETICO — Streetwear parcero' }, [title])
 
   return (
     <m.main id="main" className={`page ${className}`} tabIndex={-1}

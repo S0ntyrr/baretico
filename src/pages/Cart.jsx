@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, animate, m, useMotionValue, useTransform } from 'framer-motion'
 import Page from '../components/Page'
-import Garment from '../components/Garment'
+import Thumb from '../mascot/Thumb'
+import Mascot from '../mascot/Mascot'
+import { defaultLook, toOutfit } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { formatCOP } from '../data/products'
 import { dur, ease } from '../motion/tokens'
@@ -18,13 +20,16 @@ function Counter({ value }) {
 export default function Cart() {
   const { lines, subtotal, count, dispatch } = useCart()
   const [done, setDone] = useState(false)
+  // Baretico se viste con lo que hay en el carrito (lo demás, look de fábrica).
+  const cartLook = { ...defaultLook }
+  lines.forEach((l) => { cartLook[l.product.slot] = l.id })
   const shipping = subtotal > 300000 || subtotal === 0 ? 0 : 12000
 
   if (done) return (
     <Page title="Pedido simulado">
       <section className="section section--top"><div className="wrap center">
         <m.div className="done" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: dur.base, ease: ease.carga, delay: 0.4 }}>✓</m.div>
-        <h1 className="h1">Pedido en obra</h1>
+        <h1 className="h1">Pedido listo, parce</h1>
         <p className="muted">Esto es una simulación: no se realizó ningún cobro.</p>
         <Link to="/catalogo" className="btn">Seguir viendo</Link>
       </div></section>
@@ -38,8 +43,8 @@ export default function Cart() {
           <h1 className="h1">Carrito <span className="mono muted">({count})</span></h1>
           {lines.length === 0 ? (
             <m.div className="empty" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-              <p className="muted">Tu carrito está en obra negra: vacío.</p>
-              <Link to="/catalogo" className="btn btn--senal">Ir al catálogo</Link>
+              <p className="muted">Baretico no tiene nada que ponerse todavía.</p>
+              <Link to="/catalogo" className="btn btn--neon">Ir al catálogo</Link>
             </m.div>
           ) : (
             <div className="cart">
@@ -50,7 +55,7 @@ export default function Cart() {
                       initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 60, transition: { duration: dur.short, ease: ease.demolicion } }}
                       transition={{ duration: dur.short, ease: ease.colado }}>
-                      <div className="line__img blueprint"><Garment type={l.product.type} color={l.product.color} label="" /></div>
+                      <div className="line__img"><Thumb slot={l.product.slot} variant={l.product.variant} /></div>
                       <div className="line__info">
                         <Link to={`/producto/${l.id}`}><h2 className="h3">{l.product.name}</h2></Link>
                         <p className="mono muted">Talla {l.size} · {l.product.colorName}</p>
@@ -73,11 +78,13 @@ export default function Cart() {
                 </AnimatePresence>
               </ul>
               <m.aside className="summary" layout aria-label="Resumen">
+                <div className="summary__mascot"><Mascot outfit={toOutfit(cartLook)} label="Baretico vestido con tu carrito" /></div>
+                <p className="mono muted small center-text">Así se ve tu carrito puesto</p>
                 <div className="summary__row"><span>Subtotal</span><Counter value={subtotal} /></div>
                 <div className="summary__row"><span>Envío</span><span>{shipping ? formatCOP(shipping) : 'Gratis'}</span></div>
                 <div className="summary__row summary__total"><span>Total</span><Counter value={subtotal + shipping} /></div>
                 <p className="mono muted small">Envío gratis desde $300.000.</p>
-                <m.button className="btn btn--senal btn--block" whileTap={{ scale: 0.96 }} onClick={() => { dispatch({ type: 'clear' }); setDone(true) }}>
+                <m.button className="btn btn--neon btn--block" whileTap={{ scale: 0.96 }} onClick={() => { dispatch({ type: 'clear' }); setDone(true) }}>
                   Finalizar compra (simulado)
                 </m.button>
               </m.aside>

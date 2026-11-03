@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="wrap header__in">
-        <Link to="/" className="header__logo" aria-label="OBRA NEGRA, inicio"><Logo /></Link>
+        <Link to="/" className="header__logo" aria-label="Baretico, inicio"><Logo /></Link>
         <nav className="header__nav" aria-label="Principal">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} className="navlink">

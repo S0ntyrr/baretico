@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useReducer,
 import { getProduct } from '../data/products'
 
 const CartCtx = createContext(null)
-const KEY = 'obra-negra-cart'
+const KEY = 'baretico-cart'
 
 function reducer(state, a) {
   switch (a.type) {

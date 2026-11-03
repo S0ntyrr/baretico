@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, LazyMotion, MotionConfig } from 'framer-motion'
 import { CartProvider, useCart } from './context/CartContext'
+import { LookProvider } from './context/LookContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import FlyLayer from './components/FlyLayer'
@@ -53,14 +54,14 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadFeatures} strict>
         <HashRouter>
-          <CartProvider>
+          <LookProvider><CartProvider>
             <a href="#main" className="skip" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus() }}>Saltar al contenido</a>
             <Header />
             <AnimatedRoutes />
             <Footer />
             <FlyLayer />
             <LiveRegion />
-          </CartProvider>
+          </CartProvider></LookProvider>
         </HashRouter>
       </LazyMotion>
     </MotionConfig>

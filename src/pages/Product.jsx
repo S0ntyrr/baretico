@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AnimatePresence, m, useAnimationControls } from 'framer-motion'
 import Page from '../components/Page'
-import Garment from '../components/Garment'
+import Mascot from '../mascot/Mascot'
+import Thumb from '../mascot/Thumb'
+import { useLook } from '../context/LookContext'
 import ProductCard from '../components/ProductCard'
 import Reveal from '../components/Reveal'
-import { getProduct, products, formatCOP } from '../data/products'
+import { getProduct, bySlot, formatCOP } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { dur, ease } from '../motion/tokens'
 import NotFound from './NotFound'
@@ -14,11 +16,19 @@ export default function Product() {
   const { id } = useParams()
   const p = getProduct(id)
   const { add } = useCart()
+  const { outfit, wear } = useLook()
   const [size, setSize] = useState(null)
   const [state, setState] = useState('idle') // idle | added
   const [err, setErr] = useState(false)
   const btn = useRef(null)
   const sizesCtl = useAnimationControls()
+  // Al llegar a la prenda, Baretico se la pone (después de la transición de página).
+  useEffect(() => {
+    if (!p) return
+    setSize(null); setErr(false)
+    const t = setTimeout(() => wear(p.id), 950)
+    return () => clearTimeout(t)
+  }, [p, wear])
   if (!p) return <NotFound />
 
   const single = p.sizes.length === 1
@@ -36,28 +46,37 @@ export default function Product() {
     setTimeout(() => setState('idle'), 1600)
   }
 
-  const related = products.filter((x) => x.id !== p.id && x.category === p.category).slice(0, 3)
+  const related = ['gorra', 'gafas', 'chaqueta', 'camiseta', 'pantalon', 'tenis'].filter((sl) => sl !== p.slot).slice(0, 3).map((sl) => bySlot(sl)[0])
 
   return (
     <Page title={p.name}>
       <section className="section section--top">
         <div className="wrap pdp">
-          <m.div className="pdp__media blueprint"
+          <m.div className="pdp__media"
             initial={{ clipPath: 'inset(100% 0 0 0)' }} animate={{ clipPath: 'inset(0% 0 0 0)' }}
             transition={{ duration: dur.long, ease: ease.colado, delay: 0.35 }}>
-            <m.div initial={{ scale: 1.15, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.1, ease: ease.colado, delay: 0.45 }}>
-              <Garment type={p.type} color={p.color} label={`${p.name} en ${p.colorName}`} className="pdp__garment" />
+            <Mascot outfit={outfit} className="pdp__mascot" label={`Baretico probándose ${p.name}`} />
+            <m.div className="pdp__thumb" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: dur.short, ease: ease.colado }}>
+              <Thumb slot={p.slot} variant={p.variant} label={`${p.name} en ${p.colorName}`} />
             </m.div>
             <span className="mono pdp__ref">REF. {p.id.toUpperCase()}</span>
           </m.div>
 
           <div className="pdp__info">
-            <nav className="mono muted crumbs" aria-label="Ruta"><Link to="/catalogo">Catálogo</Link> / {p.category}</nav>
+            <nav className="mono muted crumbs" aria-label="Ruta"><Link to="/catalogo">Catálogo</Link> / {p.slot}</nav>
             <Reveal as="h1" className="h1 pdp__title">{p.name}</Reveal>
             <Reveal i={1} className="pdp__price">{formatCOP(p.price)}</Reveal>
             <Reveal i={2}><p className="muted">{p.desc}</p></Reveal>
-            <Reveal i={3}><p className="mono">Color: {p.colorName}</p></Reveal>
+            <Reveal i={3}>
+              <p className="mono">Color: {p.colorName}</p>
+              <div className="siblings" aria-label="Otras opciones">
+                {bySlot(p.slot).map((o) => (
+                  <Link key={o.id} to={`/producto/${o.id}`} className={`sib ${o.id === p.id ? 'is-on' : ''}`} aria-current={o.id === p.id ? 'page' : undefined} aria-label={o.name}>
+                    <Thumb slot={o.slot} variant={o.variant} />
+                  </Link>
+                ))}
+              </div>
+            </Reveal>
 
             <Reveal i={4}>
               <fieldset className="sizes" aria-describedby={err ? 'size-err' : undefined}>
@@ -82,7 +101,7 @@ export default function Product() {
             </Reveal>
 
             <Reveal i={5}>
-              <m.button ref={btn} className={`btn btn--add ${state === 'added' ? 'btn--senal' : ''}`} onClick={onAdd}
+              <m.button ref={btn} className={`btn btn--add ${state === 'added' ? 'btn--neon' : ''}`} onClick={onAdd}
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.94 }} transition={{ duration: dur.micro }}
                 aria-live="polite">
                 <AnimatePresence mode="wait" initial={false}>
@@ -101,7 +120,7 @@ export default function Product() {
       {related.length > 0 && (
         <section className="section" aria-labelledby="rel">
           <div className="wrap">
-            <Reveal as="h2" id="rel" className="h2">También en obra</Reveal>
+            <Reveal as="h2" id="rel" className="h2">Completa el look</Reveal>
             <div className="grid grid--3">
               {related.map((r, i) => <Reveal key={r.id} i={i}><ProductCard p={r} /></Reveal>)}
             </div>
