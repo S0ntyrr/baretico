@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, m, useAnimationControls } from 'framer-motion'
+import CartIcon from './CartIcon'
+import SavedToast from './SavedToast'
 import Logo from './Logo'
 import { useCart } from '../context/CartContext'
 import { dur, ease, stagger } from '../motion/tokens'
@@ -13,7 +15,8 @@ const links = [
 ]
 
 export default function Header() {
-  const { count, iconRef, bump } = useCart()
+  const { count, iconRef, bump, lines } = useCart()
+  const colors = lines.flatMap((l) => Array(Math.min(l.qty, 3)).fill(l.product.color))
   const [open, setOpen] = useState(false)
   const loc = useLocation()
   const badge = useAnimationControls()
@@ -40,7 +43,7 @@ export default function Header() {
         </nav>
         <div className="header__actions">
           <Link to="/carrito" className="cartbtn" ref={iconRef} aria-label={`Carrito, ${count} artículos`}>
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16l-1.5 13h-13z M8 7V5a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+            <CartIcon colors={colors} bump={bump} />
             <m.span className="cartbtn__count" animate={badge}>{count}</m.span>
           </Link>
           <button className="burger" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((o) => !o)}>
@@ -50,6 +53,7 @@ export default function Header() {
           </button>
         </div>
       </div>
+      <SavedToast />
       <AnimatePresence>
         {open && (
           <m.nav id="mobile-nav" className="mnav" aria-label="Menú móvil"

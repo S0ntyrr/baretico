@@ -28,6 +28,32 @@ Los cambios se encolan: si el usuario hace clic rápido, Baretico termina un sal
 | `ease.carga` (rebote) | `cubic-bezier(.68,-.6,.32,1.6)` | confirmaciones |
 | `ease.firme` (panel) | `cubic-bezier(.65,0,.35,1)` | telón, vuelo al carrito |
 
+## Ropero (`src/mascot/Ropero.jsx`)
+| Animación | Principio | Qué comunica |
+|---|---|---|
+| Pasar el cursor/foco: la prenda se balancea en su gancho (péndulo amortiguado), se adelanta y las demás se atenúan | Arcos, follow-through, **jerarquía** | Cuál prenda está seleccionada, como en una tienda física |
+| Cae la etiqueta de precio girando desde el gancho | Staging | El precio aparece justo donde miras |
+| Gorras, gafas y tenis "saltan" del estante con squash | Squash & stretch | Mismo feedback para objetos que no cuelgan |
+| Clic: la prenda se descuelga y vuelve a aparecer | Anticipación de salida | Se la llevaron, pero hay stock |
+
+## Guardar en el carrito
+| Animación | Principio | Qué comunica |
+|---|---|---|
+| La prenda real vuela en arco hasta el ícono del carrito, girando y encogiéndose | Arcos, aceleración | Dónde quedó guardada |
+| El carrito del header se hunde con el peso, rebota y rueda (ruedas giran); la prenda asoma en la canasta | **Anticipación**, follow-through | "Ya está adentro" |
+| Aviso "Guardado en el carrito" con **Deshacer** | Feedback | Confirmación y salida a un toque accidental |
+
+## Transición hacia el carrito ("carrito empuja")
+| Fase | Duración / curva | Principio |
+|---|---|---|
+| Un carrito gigante entra rodando y arrastra una pantalla negra sobre la página actual | 750 ms, ease-in | Aceleración: gana velocidad |
+| La pantalla negra se retira hacia la derecha | 600 ms, in-out | Continuidad de dirección (izquierda → derecha) |
+| El carrito de la página llega rodando, **frena inclinándose hacia adelante** (inercia) y se asienta; líneas de velocidad | 1.1 s | Follow-through / overshoot |
+| Las prendas caen una por una dentro de la canasta con rebote | resorte, stagger 120 ms | Peso; muestra el contenido |
+| Quitar una prenda: sale volando fuera del carrito | 400 ms, ease-in | Qué se eliminó |
+
+La ruta de destino se pasa con `AnimatePresence custom` para elegir la salida correcta.
+
 ## Resto de piezas
 | Animación | Dónde | Principio | Qué comunica |
 |---|---|---|---|
@@ -47,5 +73,6 @@ Los cambios se encolan: si el usuario hace clic rápido, Baretico termina un sal
 ## Reducir movimiento
 - `<MotionConfig reducedMotion="user">` en toda la app.
 - Baretico **cambia la prenda con un fundido**, sin salto, nube ni giro. La respiración se detiene.
-- El telón se cambia por un fundido de 0.15 s; el vuelo al carrito no se dibuja (se anuncia por `aria-live`).
+- El telón y el "carrito empuja" se cambian por un fundido de 0.15 s; el carrito grande aparece quieto y las prendas con fundido.
+- El vuelo al carrito no se dibuja (se anuncia por `aria-live`); el ropero no balancea las prendas.
 - El Lottie no se carga: se muestra el sello estático. El marquee se detiene.

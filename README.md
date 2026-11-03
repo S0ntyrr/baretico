@@ -12,10 +12,10 @@ La tienda es gris y minimalista para que el color lo ponga él.
 ## Páginas
 | Ruta | Página | Motion destacado |
 |---|---|---|
-| `/` | Inicio | Título con máscara, Baretico cae al escenario con resorte, **probador** con 6 prendas × 3 opciones, manifiesto ligado al scroll |
+| `/` | Inicio | Título con máscara, Baretico cae al escenario, **ropero de tienda física** (pasa el cursor: la prenda se balancea en su gancho; tócala: Baretico se la pone y vuela al carrito) |
 | `/catalogo` | Catálogo | Probador lateral (flotante en móvil), botón "Probar en Baretico" en cada tarjeta, filtros con `layoutId` y reacomodo con `layout` |
 | `/producto/:id` | Detalle | Al entrar, **Baretico se pone la prenda**; selector de talla, error que tiembla, botón con cambio de estado y vuelo al carrito |
-| `/carrito` | Carrito (simulado) | Baretico se viste **con lo que hay en el carrito**; líneas que entran/salen, contador que rueda, total que cuenta |
+| `/carrito` | Carrito (simulado) | Se llega con la transición **"carrito empuja"**; un carrito de supermercado grande con las prendas adentro; Baretico se viste con el carrito |
 | `/nosotros` | Nosotros | **Pieza Lottie original** (Baretico se alista), tres looks, línea de tiempo con scroll |
 | `/contacto` | Contacto | Validación animada y envío simulado |
 | `/marca` | Guía de marca | Personaje, logo, paletas, tipografía, tono y tokens de movimiento |
@@ -36,19 +36,22 @@ Regenerar la pieza Lottie: `python3 design/build-lottie.py`.
 ## Resultados (Lighthouse móvil, build de producción)
 | Página | Rendimiento | Accesibilidad | Buenas prácticas | SEO |
 |---|---|---|---|---|
-| Inicio | 90 | 100 | 100 | 100 |
-| Catálogo | 92 | 100 | 100 | 100 |
+| Inicio | 87 | 100 | 100 | 100 |
+| Catálogo | 90 | 100 | 100 | 100 |
 | Producto | 91 | 100 | 100 | 100 |
-| Carrito | 94 | 100 | 100 | 100 |
-| Nosotros | 89 | 100 | 100 | 100 |
-| Contacto | 94 | 100 | 100 | 100 |
-| Marca | 89 | 100 | 100 | 100 |
+| Carrito | 93 | 100 | 100 | 100 |
+| Nosotros | 88 | 100 | 100 | 100 |
+| Contacto | 93 | 100 | 100 | 100 |
+| Marca | 90 | 100 | 100 | 100 |
 
 ## Estructura
 ```
 src/mascot/parts.jsx     Baretico dibujado por capas (cuerpo + 6 prendas × 3 variantes)
 src/mascot/Mascot.jsx    Animación de cambio de ropa (anticipación → salto → nube → aterrizaje)
-src/mascot/Probador.jsx  Selector de prendas
+src/mascot/Probador.jsx  Probador (Baretico + ropero)
+src/mascot/Ropero.jsx    Ropero tipo tienda física
+src/components/BigCart   Carrito grande de la página de carrito
+src/components/CartIcon  Carrito del header con animación de guardado
 src/mascot/Thumb.jsx     Miniatura de una prenda (recorta el mismo dibujo)
 src/context/LookContext  Lo que Baretico tiene puesto (compartido entre páginas)
 src/context/CartContext  Carrito simulado

@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import FlyLayer from './components/FlyLayer'
 import Home from './pages/Home'
+import { Defs } from './mascot/parts'
 
 // Code-splitting por ruta: el inicio carga primero, el resto bajo demanda (rendimiento).
 const Catalog = lazy(() => import('./pages/Catalog'))
@@ -25,7 +26,7 @@ function AnimatedRoutes() {
     document.getElementById('main')?.focus({ preventScroll: true })
   }
   return (
-    <AnimatePresence mode="wait" onExitComplete={onExitComplete}>
+    <AnimatePresence mode="wait" onExitComplete={onExitComplete} custom={location.pathname}>
       <Suspense fallback={<div className="loading" aria-hidden="true" />} key={location.pathname}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -55,6 +56,8 @@ export default function App() {
       <LazyMotion features={loadFeatures} strict>
         <HashRouter>
           <LookProvider><CartProvider>
+            {/* Definiciones SVG compartidas (patrones de rizos, camuflado...) siempre visibles en el DOM */}
+            <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false"><Defs /></svg>
             <a href="#main" className="skip" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus() }}>Saltar al contenido</a>
             <Header />
             <AnimatedRoutes />

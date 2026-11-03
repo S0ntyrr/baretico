@@ -21,6 +21,8 @@
 | Lottie con `lottie_light` cargado por `IntersectionObserver` | El reproductor (47 KB gz) solo se descarga si la pieza entra en pantalla; se pausa al salir |
 | Lottie generado por script (`design/build-lottie.py`) | Fuente versionable y editable; 3.7 KB |
 | `LookContext`: el look se comparte entre páginas y se guarda | Lo que pruebas en el catálogo sigue puesto en el detalle y el carrito |
+| Definiciones SVG (patrones) en un único `<svg>` global | Varios SVG ocultos con los mismos `id` dejaban sin textura al personaje y vacío el carrito |
+| "Deshacer" al guardar en el carrito | En celular tocar = agregar; deshacer evita compras accidentales |
 | Cola de animaciones en `Mascot` | Clics rápidos no rompen la secuencia: termina un salto y hace el siguiente |
 | Respiración idle en un `div` HTML (no en el SVG) | Se anima en el compositor; animar grupos del SVG repintaba el personaje cada frame (TBT 980 → 360 ms) |
 | Carrito con `useReducer` + `localStorage` (con try/catch) | Simulado, persiste entre recargas, no se rompe en modo privado |
@@ -35,6 +37,8 @@ Lighthouse 12, móvil, throttling por defecto, sobre `npm run preview`.
 | v1.2 | 91 | 240 ms | `LazyMotion` asíncrono, animaciones infinitas a CSS |
 | v2.0 | 73 | 980 ms | Entra Baretico; orejas y cabeza animadas con CSS dentro del SVG |
 | v2.1 | 87–90 | 360 ms | Idle movido a un `div` (compositor), sin animar nodos del SVG |
+| v2.2 | 75 | 830 ms | Entra el ropero: 18 prendas con ~70 componentes animados |
+| v2.3 | 84–87 | 340–450 ms | `memo` por prenda, etiqueta solo en la seleccionada, descolgar con CSS |
 
 Resto de páginas: 89–94. Accesibilidad 100 en todas.
 

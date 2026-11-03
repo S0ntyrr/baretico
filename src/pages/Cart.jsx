@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, animate, m, useMotionValue, useTransform } from 'framer-motion'
+import { AnimatePresence, animate, m, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
+import BigCart from '../components/BigCart'
 import Page from '../components/Page'
 import Thumb from '../mascot/Thumb'
 import Mascot from '../mascot/Mascot'
@@ -20,13 +21,14 @@ function Counter({ value }) {
 export default function Cart() {
   const { lines, subtotal, count, dispatch } = useCart()
   const [done, setDone] = useState(false)
+  const reduced = useReducedMotion()
   // Baretico se viste con lo que hay en el carrito (lo demás, look de fábrica).
   const cartLook = { ...defaultLook }
   lines.forEach((l) => { cartLook[l.product.slot] = l.id })
   const shipping = subtotal > 300000 || subtotal === 0 ? 0 : 12000
 
   if (done) return (
-    <Page title="Pedido simulado">
+    <Page title="Pedido simulado" enter="cart">
       <section className="section section--top"><div className="wrap center">
         <m.div className="done" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: dur.base, ease: ease.carga, delay: 0.4 }}>✓</m.div>
         <h1 className="h1">Pedido listo, parce</h1>
@@ -37,10 +39,13 @@ export default function Cart() {
   )
 
   return (
-    <Page title="Carrito">
+    <Page title="Carrito" enter="cart">
       <section className="section section--top">
         <div className="wrap">
-          <h1 className="h1">Carrito <span className="mono muted">({count})</span></h1>
+          <div className="cart-hero">
+            <h1 className="h1">Carrito <span className="mono muted">({count})</span></h1>
+            <BigCart lines={lines} reduced={reduced} />
+          </div>
           {lines.length === 0 ? (
             <m.div className="empty" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
               <p className="muted">Baretico no tiene nada que ponerse todavía.</p>

@@ -1,24 +1,26 @@
 import { m, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useCart } from '../context/CartContext'
-import { ease } from '../motion/tokens'
+import { getProduct } from '../data/products'
+import Thumb from '../mascot/Thumb'
 
-// Micro-interacción: la "pieza" vuela en arco hacia el carrito.
-// Comunica DÓNDE quedó el producto (no solo decora).
+// Micro-interacción: la PRENDA misma vuela en arco y cae dentro del carrito.
+// Comunica dónde quedó guardada (no solo decora).
 function Flight({ f, onDone, reduced }) {
   useEffect(() => { if (reduced) onDone(f.id) }, [reduced, f.id, onDone])
   if (reduced) return null
+  const p = getProduct(f.productId)
   const dx = f.x1 - f.x0, dy = f.y1 - f.y0
+  // pico del arco por encima del destino, pero sin salirse de la pantalla
+  const peak = Math.max(40 - f.y0, Math.min(0, dy) - 90)
   return (
-    <m.span
-      aria-hidden="true"
-      className="fly"
-      style={{ left: f.x0, top: f.y0, background: f.color }}
-      initial={{ x: 0, y: 0, scale: 1 }}
-      animate={{ x: [0, dx * 0.4, dx], y: [0, dy - 120, dy], scale: [1, 1.2, 0.4] }}
-      transition={{ duration: 0.7, ease: ease.firme, times: [0, 0.45, 1] }}
-      onAnimationComplete={() => onDone(f.id)}
-    />
+    <m.div aria-hidden="true" className="fly" style={{ left: f.x0, top: f.y0 }}
+      initial={{ x: 0, y: 0, scale: 1, rotate: 0 }}
+      animate={{ x: [0, dx * 0.35, dx * 0.85, dx], y: [0, peak, peak + (dy - peak) * 0.6, dy + 4], scale: [1, 1.15, 0.6, 0.25], rotate: [0, -18, 10, 0] }}
+      transition={{ duration: 0.8, ease: 'easeInOut', times: [0, 0.4, 0.8, 1] }}
+      onAnimationComplete={() => onDone(f.id)}>
+      <Thumb slot={p.slot} variant={p.variant} />
+    </m.div>
   )
 }
 
